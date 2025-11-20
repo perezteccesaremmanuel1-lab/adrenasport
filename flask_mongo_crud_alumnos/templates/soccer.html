@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fútbol Soccer</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('https://ipmark.com/wp-content/uploads/pepsi-campana-mundial-ok-800x445.jpg'); /* Cambia esto por tu imagen */
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .product-card {
+      border: 1px solid #ffffff;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.85);
+      transition: transform 0.2s;
+    }
+    .product-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .logo {
+      max-width: 180px;
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-4">
+
+    <div class="text-center mb-3">
+      <a href="{{ url_for('americano') }}" class="btn btn-danger">Ir a Fútbol Americano 🏈</a>
+    </div>
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRkPa-NwJo8vnZoc5clvxHj7UrjIq4VlG9tiRQbgSKXSR_CUTKMnyYDzrzXJYfQ3sOSVk&usqp=CAU" alt="Logo Adrena Sport" class="logo">
+
+    <h1 class="text-center text-white mb-4">⚽ Productos de Fútbol Soccer</h1>
+    <div class="text-center mb-4">
+      <a href="{{ url_for('carrito') }}" class="btn btn-success">Ir al Carrito 🛒</a>
+    </div>
+
+    <div class="row g-4">
+      {% for producto in [
+        {'img': 'https://voit.vtexassets.com/arquivos/ids/165835-800-800?v=638622862447770000&width=800&height=800&aspect=true', 'name': 'Balón Pro Nike', 'price': 850},
+        {'img': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqS0hYlc9ETGe4M8TCiREA-Wd6oV4yOwVMxplk0bY6QXEntRxbrTZPESgFA-ANs3ngA3I&usqp=CAU', 'name': 'Jersey Marruecos', 'price': 1200},
+        {'img': 'https://thumblr.uniid.it/product/211996/6dd9f08ef4be.jpg?width=3840&format=webp&q=75', 'name': 'Tenis Adidas Predator', 'price': 1980},
+        {'img': 'https://http2.mlstatic.com/D_NQ_NP_611417-MLM76762101876_062024-O-jersey-original-puma-rayados-monterrey-local-jugador-2025.webp', 'name': 'Jersey Monterrey', 'price': 1990},
+        {'img': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5Ny9mZLRxHCBokklXAeqGx0DQnA9AwlDSaQ&s', 'name': 'Balón UEFA Champions', 'price': 1945},
+        {'img': 'https://http2.mlstatic.com/D_884932-CBT73745782128_012024-C.jpg', 'name': 'Máscara Protectora', 'price': 2523},
+        {'img': 'https://cdn5.coppel.com/pr/8708432-1.jpg?iresize=width:400,height:320', 'name': 'Tachones Nike Mercurial', 'price': 2999},
+        {'img': 'https://www.bestbuysoccer.com/cdn/shop/files/puma-future-ultimate-nc-goalkeeper-gloves-bluesunset-glowelectric-pepp-123527.png?v=1750740692', 'name': 'Guantes Puma GK', 'price': 1150},
+        {'img': 'https://resources.claroshop.com/medios-plazavip/t1/1719432069DNQNP838734MLM52046949891102022Ojpg', 'name': 'Jersey Argentina 2022', 'price': 1800},
+        {'img': 'https://m.media-amazon.com/images/I/81f5X2xiJhL.jpg', 'name': 'Balón Adidas Al Rihla', 'price': 890},
+        {'img': 'https://elektra.vtexassets.com/arquivos/ids/17258616-800-450?v=638923805502530000&width=800&height=450&aspect=true', 'name': 'Espinilleras Nike', 'price': 430},
+        {'img': 'https://m.media-amazon.com/images/I/51vVkwKWlGL._AC_UY1000_.jpg', 'name': 'Jersey Barcelona 24/25', 'price': 1600},
+      ] %}
+      <div class="col-md-6 col-lg-4">
+        <div class="product-card">
+          <img src="{{ producto.img }}" class="img-fluid rounded mb-2" alt="{{ producto.name }}">
+          <h5>{{ producto.name }}</h5>
+          <p class="text-dark">Producto oficial</p>
+          <p class="text-success fw-bold">${{ producto.price }}</p>
+          <button class="btn btn-primary w-100" onclick="agregarAlCarrito('{{ producto.name }}', {{ producto.price }})">Agregar al carrito</button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    function agregarAlCarrito(nombre, precio){
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({name: nombre, price: precio});
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(nombre + " agregado al carrito 🛒");
+    }
+  </script>
+</body>
+</html>

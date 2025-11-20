@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fútbol Americano</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('https://thumbs.dreamstime.com/b/banner-de-jugador-f%C3%BAtbol-americano-para-anuncios-foto-una-revista-deportiva-o-sitio-web-imagen-publicidad-apuestas-plantilla-un-304812914.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+    }
+    .product-card {
+      border: 1px solid #ffffff;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.85);
+      transition: transform 0.2s;
+    }
+    .product-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .logo {
+      max-width: 200px;
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-4">
+
+    <div class="text-center mb-3">
+      <a href="{{ url_for('soccer') }}" class="btn btn-primary">Ir a Fútbol Soccer ⚽</a>
+    </div>
+
+    <img src="https://thumbs.dreamstime.com/b/mascota-de-lion-american-football-ball-sports-119221122.jpg" alt="Logo Adrena Sport" class="logo">
+
+    <h1 class="text-center mb-4">🏈 Productos de Fútbol Americano</h1>
+    <div class="text-center mb-4">
+      <a href="{{ url_for('carrito') }}" class="btn btn-success">Ir al Carrito 🛒</a>
+    </div>
+
+    <div class="row g-4">
+      {% for producto in [
+        {'img': 'https://carlosrosadosports.com/cdn/shop/files/image_fadcbbd3-a461-4568-a791-b329244a6adf.jpg?v=1682805178', 'name': 'Casco Riddell', 'price': 1500},
+        {'img': 'https://http2.mlstatic.com/D_NQ_NP_951986-MLM92254686872_092025-O.webp', 'name': 'Balón Wilson', 'price': 1200},
+        {'img': 'https://m.media-amazon.com/images/I/71h8As8lLAL.jpg', 'name': 'Jersey NFL', 'price': 1350},
+        {'img': 'https://http2.mlstatic.com/D_NQ_NP_733334-MLM84328873696_052025-O.webp', 'name': 'Hombreras Xenith', 'price': 2200},
+        {'img': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8pekPnp34xnIHtiLBotoJQG0iuA2Ea6NMsw&s', 'name': 'Pants Cardinals', 'price': 980},
+        {'img': 'https://www.nerias.com.mx/cdn/shop/files/back-front_150646_21_2_2024_16_49_44_717.jpg?v=1708555940', 'name': 'Guantes Nike Vapor', 'price': 850},
+        {'img': 'https://dicass.com.mx/api/fileApi/images/120/8/1599685329334474_MinicascoSeattlecopy.jpg', 'name': 'Casco Seattle Seahawks', 'price': 4500},
+        {'img': 'https://m.media-amazon.com/images/I/91S0NqvLdNL._AC_UF894,1000_QL80_.jpg', 'name': 'Tobilleras Adidas', 'price': 340},
+        {'img': 'https://www.nerias.com.mx/cdn/shop/files/1da00ba7..jpg?v=1707852772&width=480', 'name': 'Rodilleras Schutt', 'price': 780},
+        {'img': 'https://www.nerias.com.mx/cdn/shop/files/championship_21_2_2024_19_42_32_756.jpg?v=1740502521&width=480', 'name': 'Balón Nike Vapor Elite', 'price': 1390},
+        {'img': 'https://images.footballfanatics.com/philadelphia-eagles/mens-nike-jalen-hurts-kelly-green-philadelphia-eagles-alternate-game-player-jersey_ss5_p-5257792+u-ottsvbbuzcmp2xquw8t7+v-tjjiyc3roxmb6bclijqc.jpg?_hv=2&w=600', 'name': 'Jersey Eagles', 'price': 1150},
+        {'img': 'https://i5.walmartimages.com/asr/0d32f81e-c23f-4a32-b964-a752df67fd69.ff3ae9a7d487257f82d6857041565241.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF', 'name': 'Calcetas Antiderrapantes', 'price': 250},
+      ] %}
+      <div class="col-md-6 col-lg-4">
+        <div class="product-card">
+          <img src="{{ producto.img }}" class="img-fluid rounded mb-2" alt="{{ producto.name }}">
+          <h5>{{ producto.name }}</h5>
+          <p class="text-dark">Producto oficial</p>
+          <p class="text-success fw-bold">${{ producto.price }}</p>
+          <button class="btn btn-primary w-100" onclick="agregarAlCarrito('{{ producto.name }}', {{ producto.price }})">Agregar al carrito</button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    function agregarAlCarrito(nombre, precio){
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({name:nombre, price:precio});
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(nombre + " agregado al carrito 🛒");
+    }
+  </script>
+</body>
+</html>

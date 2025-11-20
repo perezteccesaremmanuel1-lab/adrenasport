@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adrena Sport - Inicio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('https://media.istockphoto.com/id/693252158/es/foto/campo-de-f%C3%BAtbol-con-iluminaci%C3%B3n-y-noche-cielo.jpg?s=612x612&w=0&k=20&c=61chOYt533jF8LdhRY-qphQXNupvBS3fPk5JxmdontQ=');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      color: white;
+    }
+    .category-card {
+      background: rgba(0,0,0,0.6);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .category-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+    .logo {
+      max-width: 200px;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5 text-center">
+    <img src="https://p.turbosquid.com/ts-thumb/Hf/9vOn1e/Tc/1/png/1617304360/600x600/fit_q87/0f3f67e088c3fae938b1b2d2b7b5be0bef588c9c/1.jpg" alt="Logo Adrena Sport" class="logo">
+
+    <h1 class="mb-5">Bienvenido a Adrena Sport</h1>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <a href="{{ url_for('soccer') }}">
+          <div class="category-card">
+            <h2>⚽ Fútbol Soccer</h2>
+            <p>Explora nuestros productos de fútbol</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="{{ url_for('americano') }}">
+          <div class="category-card">
+            <h2>🏈 Fútbol Americano</h2>
+            <p>Explora nuestros productos de fútbol americano</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <a href="{{ url_for('logout') }}" class="btn btn-danger">Cerrar sesión</a>
+    </div>
+  </div>
+</body>
+</html>
