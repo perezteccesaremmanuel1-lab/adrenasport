@@ -3,7 +3,8 @@ from pymongo import MongoClient
 from bson import ObjectId
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='flask_mongo_crud_sport/templates')
+
 app.secret_key = os.environ.get("SECRET_KEY", "clave_super_secreta_por_defecto")
 
 # Configuración de MongoDB
